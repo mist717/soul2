@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "heart-mod",
+  "version": "${version}",
+  "name": "Heart Badges",
+  "description": "Wear a virtue or vice heart badge next to your name.",
+  "authors": ["You"],
+  "contact": {},
+  "license": "CC0-1.0",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.example.heartmod.HeartMod"]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "fabric-api": "*",
+    "minecraft": "~1.21.1",
+    "java": ">=21"
+  }
+}
