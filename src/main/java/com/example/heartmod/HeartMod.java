@@ -100,7 +100,7 @@ public class HeartMod implements ModInitializer {
         }
 
         team.setPrefix(type.toPrefix());
-        scoreboard.addScoreHolderToTeam(player.getGameProfile().getName(), team);
+        scoreboard.addScoreHolderToTeam(player.getName().getString(), team);
 
         source.sendFeedback(() -> Text.literal("Heart badge set to " + type.display)
                 .formatted(type.color), false);
@@ -125,7 +125,7 @@ public class HeartMod implements ModInitializer {
     }
 
     private String teamNameFor(ServerPlayerEntity player) {
-        String base = "heart_" + player.getGameProfile().getName();
+        String base = "heart_" + player.getName().getString();
         return base.length() > 40 ? base.substring(0, 40) : base;
     }
 }
