@@ -9,7 +9,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import static com.mojang.brigadier.builder.LiteralArgumentBuilder.literal;
 
 /**
@@ -71,7 +71,7 @@ public class HeartMod implements ModInitializer {
     @Override
     public void onInitialize() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-            var root = literal("heart");
+            LiteralArgumentBuilder<ServerCommandSource> root = literal("heart");
 
             for (HeartType type : HeartType.values()) {
                 root.then(literal(type.commandName())
