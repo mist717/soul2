@@ -74,11 +74,11 @@ public class HeartMod implements ModInitializer {
             LiteralArgumentBuilder<ServerCommandSource> root = literal("heart");
 
             for (HeartType type : HeartType.values()) {
-                root.then(literal(type.commandName())
+                root.then(LiteralArgumentBuilder.<ServerCommandSource>literal(type.commandName())
                         .executes(ctx -> setHeart(ctx.getSource(), type)));
             }
 
-            root.then(literal("clear").executes(ctx -> clearHeart(ctx.getSource())));
+            root.then(LiteralArgumentBuilder.<ServerCommandSource>literal("clear").executes(ctx -> clearHeart(ctx.getSource())));
 
             dispatcher.register(root);
         });
