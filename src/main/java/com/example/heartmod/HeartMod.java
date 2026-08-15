@@ -7,9 +7,13 @@ import net.minecraft.scoreboard.Team;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
+
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+
 import static com.mojang.brigadier.builder.LiteralArgumentBuilder.literal;
 
 /**
@@ -58,15 +62,28 @@ public class HeartMod implements ModInitializer {
             return name().toLowerCase();
         }
 
-        /** Builds the little heart icon shown before the player's name. */
+        /** The private-use codepoint for this type's glyph: solid heart or cracked heart. */
+        private char glyphChar() {
+            return cracked ? '\uE001' : '\uE000';
+        }
+
+        private MutableText glyph() {
+            return Text.literal(String.valueOf(glyphChar()))
+                    .setStyle(Style.EMPTY.withFont(FONT_ID).withColor(color));
+        }
+
+        /** Heart + space, shown before the player's name. */
         public MutableText toPrefix() {
-            MutableText heart = Text.literal("\u2665 ").formatted(color);
-            if (cracked) {
-                heart = heart.formatted(Formatting.STRIKETHROUGH);
-            }
-            return heart;
+            return glyph().copy().append(Text.literal(" "));
+        }
+
+        /** Space + heart, shown after the player's name. */
+        public MutableText toSuffix() {
+            return Text.literal(" ").append(glyph());
         }
     }
+
+    private static final Identifier FONT_ID = Identifier.of("heart-mod", "heart");
 
     @Override
     public void onInitialize() {
@@ -100,6 +117,7 @@ public class HeartMod implements ModInitializer {
         }
 
         team.setPrefix(type.toPrefix());
+        team.setSuffix(type.toSuffix());
         scoreboard.addScoreHolderToTeam(player.getName().getString(), team);
 
         source.sendFeedback(() -> Text.literal("Heart badge set to " + type.display)
