@@ -70,7 +70,9 @@ public class HeartMod implements ModInitializer {
 
         private MutableText glyph() {
             return Text.literal(String.valueOf(glyphChar()))
-                    .setStyle(Style.EMPTY.withFont(new StyleSpriteSource.Font(FONT_ID)) .withColor(color) .withShadowColor(0)); }
+                    .setStyle(Style.EMPTY.withFont(new StyleSpriteSource.Font(FONT_ID))
+                            .withColor(color)
+                            .withShadowColor(0));
         }
 
         private MutableText spacer() {
