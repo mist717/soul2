@@ -73,19 +73,24 @@ public class HeartMod implements ModInitializer {
                     .setStyle(Style.EMPTY.withFont(new StyleSpriteSource.Font(FONT_ID)).withColor(color));
         }
 
+        private MutableText spacer() {
+            return Text.literal(" ").setStyle(Style.EMPTY.withFont(DEFAULT_FONT));
+        }
+
         /** Heart + space, shown before the player's name. */
         public MutableText toPrefix() {
-            return glyph().copy().append(Text.literal(" "));
+            return glyph().copy().append(spacer());
         }
 
         /** Space + heart, shown after the player's name. */
         public MutableText toSuffix() {
-            return Text.literal(" ").append(glyph());
+            return spacer().append(glyph());
         }
     }
 
     private static final Identifier FONT_ID = Identifier.of("heart-mod", "heart");
-    private static final StyleSpriteSource DEFAULT_FONT = new StyleSpriteSource.Font(Identifier.of("minecraft", "default"));
+    private static final StyleSpriteSource DEFAULT_FONT =
+            new StyleSpriteSource.Font(Identifier.of("minecraft", "default"));
 
     @Override
     public void onInitialize() {
