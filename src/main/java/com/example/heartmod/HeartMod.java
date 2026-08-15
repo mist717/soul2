@@ -85,6 +85,7 @@ public class HeartMod implements ModInitializer {
     }
 
     private static final Identifier FONT_ID = Identifier.of("heart-mod", "heart");
+    private static final StyleSpriteSource DEFAULT_FONT = new StyleSpriteSource.Font(Identifier.of("minecraft", "default"));
 
     @Override
     public void onInitialize() {
