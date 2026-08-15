@@ -8,6 +8,7 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
+import net.minecraft.text.StyleSpriteSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -69,7 +70,7 @@ public class HeartMod implements ModInitializer {
 
         private MutableText glyph() {
             return Text.literal(String.valueOf(glyphChar()))
-                    .setStyle(Style.EMPTY.withFont(FONT_ID).withColor(color));
+                    .setStyle(Style.EMPTY.withFont(new StyleSpriteSource.Font(FONT_ID)).withColor(color));
         }
 
         /** Heart + space, shown before the player's name. */
